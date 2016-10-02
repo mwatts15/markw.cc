@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Mark W. - misc.</title>
+<style>
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Lato Light"), local("Lato-Light"), url("https://fonts.gstatic.com/s/lato/v11/EsvMC5un3kjyUhB9ZEPPwg.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Lato Bold"), local("Lato-Bold"), url("https://fonts.gstatic.com/s/lato/v11/H2DMvhDLycM56KNuAtbJYA.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+.album-title {
+font-size: 55%;
+}
+
+#title {
+margin: auto;
+margin-bottom: 0px;
+padding: 10px;
+font-size: 400%;
+font-family: Lato;
+text-align: center;
+line-height: 0.8;
+color: rgb(34, 34, 34);
+}
+
+#title-2 {
+margin: 0px;
+padding: 0px;
+font-size: 66%;
+font-family: Lato;
+text-align: center;
+line-height: 1.1em;
+color: rgb(34, 34, 34);
+}
+.body-text {
+margin: auto;
+padding: 10px;
+text-align: center;
+font-size: 100%;
+font-family: Lato;
+}
+a {
+text-decoration: none;
+font-weight: bold;
+color: rgb(255, 255, 255);
+}
+
+li {
+list-style-type: none;
+}
+body {
+background-image:url('res/background.png');
+padding: 10px;
+font-size: 1.5em;
+}
+
+@media screen (max-height: 600px) and (orientation: portrait){
+body {
+font-size: 3.24em;
+}
+}
+</style>
+</head>
+<body>
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                var tracks = JSON.parse(xhttp.responseText);
+                var s = '';
+                for (var $i = 0; $i < tracks.length; $i ++)
+                {
+                    var data = tracks[$i];
+                    s += '<div>' + data.artist + ' - ' + 
+                        (('title' in data)?data.title:'*********') + 
+                        ' <span class="album-title">on <i>' + data.album + '</i>' + 
+                        (('date' in data)?('(' + data['date'] + ')'):'') + '</span></div>';
+                }
+                console.log('s = '+s);
+                document.getElementById("now-playing").innerHTML = s;
+            }
+        };
+        xhttp.open("GET", "res/ext/now-playing.json", true);
+        xhttp.send();
+    </script>
+    <h1 id='title'>M A R K</h1>
+    <div id="title-2">recently listened to...</div>
+    <div class="body-text" id="now-playing"></div>
+    <div class="body-text"><a href="/">home</a></div>
+</body>
+</html>
+
