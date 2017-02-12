@@ -6,7 +6,7 @@ function create(id, htmlStr) {
 }
 var artists = [];
 var tracks = [];
-var main = function () {
+var main = function (doTransition) {
     var xhttp = new XMLHttpRequest();
     var table = document.getElementById("now-playing-table");
 
@@ -39,13 +39,14 @@ var main = function () {
             }
             for (var i = 0; i < dead_tracks.length; i++) {
                 var elem = dead_tracks[i];
-                console.log("Setting newtrack on " + elem.id);
+                console.log("Setting oldtrack on " + elem.id);
                 elem.style.cssText =  'transition: font-size 0.5s ease-in-out .7s, opacity 0.5s ease 0.0s; opacity: 0 !important';
                 elem.className += ' oldtrack';
                 setTimeout(function(elem){ 
                     elem.parentNode.removeChild(elem);
-                }, 2000, elem);
+                }, doTransition?2000:0, elem);
             }
+
             setTimeout(function () {
                 for (var $i = 0; $i < new_new_tracks.length; $i ++)
                 {
@@ -65,7 +66,9 @@ var main = function () {
                     var elem = create("_"+data['id'], '<td class="title-and-artist2" style="text-align: right">' + 
                             artist_part + '</td><td class="album-title2" style="text-align: left">' + 
                             album_part + '</td>');
-                    elem.className += ' newtrack';
+                    if (doTransition) {
+                        elem.className += ' newtrack';
+                    }
                     if (table.childNodes.length > 0) {
                         table.insertBefore(elem, table.childNodes[0]);
                     } else {
@@ -77,7 +80,7 @@ var main = function () {
                     }, 100, elem)
                 }
                 tracks = new_tracks;
-            }, 1000);
+            }, doTransition?1000:0 );
         }
     };
     xhttp.open("GET", "res/ext/now-playing.json", true);
