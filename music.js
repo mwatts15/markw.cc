@@ -1,5 +1,4 @@
 function create(id, htmlStr) {
-    var frag = document.createDocumentFragment();
     var temp = document.createElement('tr');
     temp.id = id;
     temp.innerHTML = htmlStr;
@@ -15,7 +14,7 @@ var main = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var new_tracks = JSON.parse(xhttp.responseText);
             var new_new_tracks = [];
-            var dead_new_tracks = [];
+            var dead_tracks = [];
             for (var i = 0; i < new_tracks.length; i++) {
                 var found = false;
                 for (var j = 0; j < tracks.length; j++) {
@@ -36,11 +35,9 @@ var main = function () {
                     found = found || (id1 == id2);
                 }
                 if (!found) {
-                    dead_new_tracks.unshift(tracks[i]);
+                    dead_tracks.unshift(tracks[i]);
                 }
             }
-            console.log(new_new_tracks);
-            console.log(dead_new_tracks);
             for (var $i = 0; $i < new_new_tracks.length; $i ++)
             {
                 var data = new_new_tracks[$i];
@@ -70,8 +67,8 @@ var main = function () {
                     console.log("Clearing newtrack on " + elem.id);
                 }, 100, elem)
             }
-            for (var i = 0; i < dead_new_tracks.length; i++) {
-                var elem = document.getElementById(dead_new_tracks[i]['id']);
+            for (var i = 0; i < dead_tracks.length; i++) {
+                var elem = document.getElementById(dead_tracks[i]['id']);
                 elem.parentNode.removeChild(elem);
             }
             tracks = new_tracks;
