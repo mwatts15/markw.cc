@@ -1,0 +1,70 @@
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  src: url("res/lato-light.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  src: url("res/lato.woff2") format("woff2");
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+#title {
+margin: auto;
+margin-bottom: 0px;
+padding: 10px;
+font-size: 400%;
+font-family: Lato;
+text-align: center;
+line-height: 0.8;
+color: rgb(155, 155, 155);
+}
+
+.title-2 {
+margin: 0px;
+padding: 0px;
+font-size: 66%;
+font-family: Lato;
+text-align: center;
+line-height: 1.1em;
+color: rgb(155, 155, 155);
+}
+
+.body-text {
+margin: auto;
+padding: 10px;
+text-align: center;
+font-size: 100%;
+font-family: Lato;
+color: rgb(155, 155, 155);
+}
+
+a {
+text-decoration: none;
+font-weight: bold;
+color: rgb(255, 255, 255);
+}
+
+body {
+background:rgb(34,34,34);
+padding: 10px;
+font-size: 1.5em;
+}
+
+@media (orientation: portrait) {
+    body {
+        font-size: 3.24em;
+    }
+}
+
+/*
+@media screen (max-device-width: 600px) and (orientation: landscape){
+body {
+font-size: 3.24em;
+}
+}
+*/

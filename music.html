@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="refresh" content="300" >
+<title>Mark W. - Music</title>
+<link href="main.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="music.js"></script>
+<style>
+.album-title {
+font-size: smaller;
+color: rgb(100, 100, 100);
+text-align:left;
+padding-left: 1em;
+}
+#now-playing div {
+text-align: left;
+margin: .5em;
+}
+
+#now-playing-table {
+text-align: center;
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+border-width: 0px;
+table-layout: fixed;
+}
+
+#now-playing-table th {
+border-width: 0px;
+border: 0px;
+}
+
+#now-playing-table td {
+border: 0px;
+border-width-top: 0px;
+border-width-bottom: 0px;
+border-width-right: 1em;
+border-width-left: 1em;
+}
+
+#favorite-artists div {
+background:rgba(255,255,255,0.001);
+}
+
+.title-and-artist {
+float:left;
+text-align:right;
+width: 50%;
+margin: .5em;
+}
+
+.title-and-artist2 td {
+width: 50%;
+}
+
+.title-and-artist2 a {
+font-weight: normal;
+}
+
+.album-title2 {
+font-size: smaller;
+color: rgb(100, 100, 100);
+}
+
+.album-title2 a {
+font-weight: normal;
+color: inherit;
+}
+
+li {
+list-style-type: none;
+}
+
+.newtrack * {
+color: rgba(0, 0, 0, 0.0) !important;
+text-decoration: none;
+}
+
+#now-playing * {
+transition: color 1s;
+}
+
+</style>
+</head>
+<body>
+    <h1 id='title'>M A R K</h1>
+    <div class="title-2">recently listened to...</div>
+    <div class="body-text" id="now-playing">
+    <table id="now-playing-table"></table>
+    </div>
+    <div class="title-2">favorite artists in my collection</div>
+    <div class="body-text" id="favorite-artists"></div>
+    <div class="body-text"><a href="/">home</a></div>
+    <script>
+    window.onload = function () {
+        main();
+        window.setInterval(main, 3000);
+    }
+    </script>
+</body>
+</html>
+
