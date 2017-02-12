@@ -26,52 +26,58 @@ var main = function () {
                     new_new_tracks.unshift(new_tracks[i]);
                 }
             }
-
-            for (var i = 0; i < tracks.length; i++) {
+            for (var i = 0; i < table.children.length; i++) {
                 var found = false;
+                var id1 = table.children[i].id;
                 for (var j = 0; j < new_tracks.length; j++) {
-                    var id1 = tracks[i]['id'];
-                    var id2 = new_tracks[j]['id'];
-                    found = found || (id1 == id2);
+                    var id2 = '_' + new_tracks[j]['id'];
+                    found = found || (id1 ==  id2);
                 }
                 if (!found) {
-                    dead_tracks.unshift(tracks[i]);
+                    dead_tracks.unshift(table.children[i]);
                 }
-            }
-            for (var $i = 0; $i < new_new_tracks.length; $i ++)
-            {
-                var data = new_new_tracks[$i];
-                var artist_part = data.artist;
-                if ('artist_id' in data)
-                {
-                    artist_part = '<a href="https://musicbrainz.org/artist/'+data['artist_id']+'">'+artist_part+'</a>';
-                }
-                artist_part += ' - ' + (('title' in data)?data.title:'*********');
-
-                var album_part = data.album+(('date' in data)?('(' + data['date'] + ')'):'');
-                if ('album_id' in data)
-                {
-                    album_part = '<a href="https://musicbrainz.org/album/'+data['album_id']+'">'+album_part+'</a>';
-                }
-                var elem = create(data['id'], '<td class="title-and-artist2" style="text-align: right">' + 
-                        artist_part + '</td><td class="album-title2" style="text-align: left">' + 
-                        album_part + '</td>');
-                elem.className += ' newtrack';
-                if (table.childNodes.length > 0) {
-                    table.insertBefore(elem, table.childNodes[0]);
-                } else {
-                    table.appendChild(elem);
-                }
-                setTimeout(function(elem){ 
-                    elem.className = elem.className.replace(/ *\bnewtrack\b */, ''); 
-                    console.log("Clearing newtrack on " + elem.id);
-                }, 100, elem)
             }
             for (var i = 0; i < dead_tracks.length; i++) {
-                var elem = document.getElementById(dead_tracks[i]['id']);
-                elem.parentNode.removeChild(elem);
+                var elem = dead_tracks[i];
+                console.log("Setting newtrack on " + elem.id);
+                elem.style.cssText =  'transition: font-size 0.5s ease-in-out .7s, opacity 0.5s ease 0.0s; opacity: 0 !important';
+                elem.className += ' oldtrack';
+                setTimeout(function(elem){ 
+                    elem.parentNode.removeChild(elem);
+                }, 2000, elem);
             }
-            tracks = new_tracks;
+            setTimeout(function () {
+                for (var $i = 0; $i < new_new_tracks.length; $i ++)
+                {
+                    var data = new_new_tracks[$i];
+                    var artist_part = data.artist;
+                    if ('artist_id' in data)
+                    {
+                        artist_part = '<a href="https://musicbrainz.org/artist/'+data['artist_id']+'">'+artist_part+'</a>';
+                    }
+                    artist_part += ' - ' + (('title' in data)?data.title:'*********');
+
+                    var album_part = data.album+(('date' in data)?('(' + data['date'] + ')'):'');
+                    if ('album_id' in data)
+                    {
+                        album_part = '<a href="https://musicbrainz.org/album/'+data['album_id']+'">'+album_part+'</a>';
+                    }
+                    var elem = create("_"+data['id'], '<td class="title-and-artist2" style="text-align: right">' + 
+                            artist_part + '</td><td class="album-title2" style="text-align: left">' + 
+                            album_part + '</td>');
+                    elem.className += ' newtrack';
+                    if (table.childNodes.length > 0) {
+                        table.insertBefore(elem, table.childNodes[0]);
+                    } else {
+                        table.appendChild(elem);
+                    }
+                    setTimeout(function(elem){ 
+                        elem.className = elem.className.replace(/ *\bnewtrack\b */, ''); 
+                        console.log("Clearing newtrack on " + elem.id);
+                    }, 100, elem)
+                }
+                tracks = new_tracks;
+            }, 1000);
         }
     };
     xhttp.open("GET", "res/ext/now-playing.json", true);

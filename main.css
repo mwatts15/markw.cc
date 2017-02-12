@@ -18,7 +18,7 @@ margin: auto;
 margin-bottom: 0px;
 padding: 10px;
 font-size: 400%;
-font-family: Lato;
+font-family: LatoWeb;
 text-align: center;
 line-height: 0.8;
 color: rgb(155, 155, 155);
@@ -28,7 +28,7 @@ color: rgb(155, 155, 155);
 margin: 0px;
 padding: 0px;
 font-size: 66%;
-font-family: Lato;
+font-family: LatoWebLight;
 text-align: center;
 line-height: 1.1em;
 color: rgb(155, 155, 155);
@@ -39,7 +39,7 @@ margin: auto;
 padding: 10px;
 text-align: center;
 font-size: 100%;
-font-family: Lato;
+font-family: LatoWebLight;
 color: rgb(155, 155, 155);
 }
 
